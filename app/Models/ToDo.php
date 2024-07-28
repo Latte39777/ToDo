@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ToDo extends Model
 {
     use HasFactory;
+
+    public function toDoDetailes()
+    {
+        return $this->hasMany(ToDoDetail::class);
+    }
 }
