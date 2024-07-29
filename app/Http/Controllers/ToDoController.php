@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ToDo\StoreRequest;
+use App\Models\ToDo;
 use Illuminate\Http\Request;
 
 class ToDoController extends Controller
@@ -13,7 +15,11 @@ class ToDoController extends Controller
      */
     public function index()
     {
-        //
+        //ToDo を取得する
+        $toDos = ToDo::get();
+
+        //取得したToDo を返却する
+        return $toDos;
     }
 
     /**
@@ -32,9 +38,16 @@ class ToDoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        //新規のToDoを作成する
+        $toDo = new ToDo();
+
+        //タイトルをToDoモデルを設定する
+        $toDo->title = $request->get("title");
+
+        //DBにデータを登録する
+        $toDo->save();
     }
 
     /**
